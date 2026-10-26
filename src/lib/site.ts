@@ -1,6 +1,3 @@
-export const contactEmail = "hello@generaldata.company";
-export const contactHref = `mailto:${contactEmail}`;
-
 export const siteContent = {
   metadata: {
     title: "General Data Company",
@@ -8,14 +5,12 @@ export const siteContent = {
   },
   header: {
     wordmark: "General Data Company",
-    contactLabel: "Talk to us",
   },
   hero: {
     kicker: "Data licensing",
     title: "Turn your data into training data.",
     description:
       "AI runs on licensed data. General Data Company finds what you have, clears the rights, and brings it to market.",
-    ctaLabel: "Talk to us",
   },
   dataFlow: {
     accessibleLabel: "Data flowing from companies into AI training",
