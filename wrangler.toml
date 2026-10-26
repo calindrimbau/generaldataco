@@ -1,9 +1,12 @@
 name = "generaldataco"
 compatibility_date = "2026-10-26"
 
+# Zone routes, not custom domains: the apex and www hostnames already have
+# proxied DNS records serving a previous deployment, and routes intercept
+# those requests without touching DNS. Removing a route restores the old site.
 routes = [
-  { pattern = "generaldataco.com", custom_domain = true },
-  { pattern = "www.generaldataco.com", custom_domain = true }
+  { pattern = "generaldataco.com/*", zone_name = "generaldataco.com" },
+  { pattern = "www.generaldataco.com/*", zone_name = "generaldataco.com" }
 ]
 
 [assets]
