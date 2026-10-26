@@ -4,7 +4,7 @@
 
 The production site is one assets-only Cloudflare Worker named `generaldataco`. Next.js writes the static export to `out/`, and Workers Static Assets serves that directory. There is no Worker script and there are no bindings.
 
-Wrangler uses `not_found_handling = "404-page"` so an unmatched request returns the nearest exported `404.html` with a 404 status. The custom domains are `generaldataco.com` and `www.generaldataco.com`. Cloudflare custom domains create and manage their DNS records and certificates automatically.
+Wrangler uses `not_found_handling = "404-page"` so an unmatched request returns the nearest exported `404.html` with a 404 status. The Worker serves `generaldataco.com/*` and `www.generaldataco.com/*` through zone routes in the `generaldataco.com` zone. Routes were chosen over custom domains because both hostnames already carry proxied DNS records from a previous deployment; the routes intercept requests ahead of that origin without any DNS changes, and removing the routes restores the previous site.
 
 ## Pipeline
 
