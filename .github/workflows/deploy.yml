@@ -2,12 +2,12 @@ name: Deploy
 
 on:
   push:
-    branches: [main]
   workflow_dispatch:
 
-# One production release at a time. Never cancel a deployment midway.
+# Production publishes share one lock. Verification-only runs use unique groups
+# so they cannot delay or displace a production release.
 concurrency:
-  group: cloudflare-workers-production
+  group: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && 'cloudflare-workers-production' || format('verify-{0}', github.run_id) }}
   cancel-in-progress: false
 
 permissions:

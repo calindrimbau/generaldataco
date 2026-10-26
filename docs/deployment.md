@@ -8,9 +8,9 @@ Wrangler uses `not_found_handling = "404-page"` so an unmatched request returns 
 
 ## Pipeline
 
-`.github/workflows/deploy.yml` verifies and deploys the site on every push to `main`. A manual workflow dispatch runs the same install, lint, build, and Wrangler dry-run checks, but never publishes.
+`.github/workflows/deploy.yml` runs install, lint, build, and Wrangler dry-run verification on every push and on manual workflow dispatches. Only a push to `main` publishes. Production publishing runs share the `cloudflare-workers-production` concurrency lock, while verification-only runs use unique groups so they cannot delay or displace a production release.
 
-`npm run deploy` is the single real deploy command for CI and intentional local deployments.
+`npm run deploy` builds the static export first and then publishes it with Wrangler. It is the single real deploy command for CI and intentional local deployments, so a local deploy cannot publish a stale or missing `out/` directory.
 
 ## GitHub Actions secrets
 
